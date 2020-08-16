@@ -1,1 +1,1 @@
-HALAMAN PENDAFTARAN USER
+@extends('layouts.adminlayout')

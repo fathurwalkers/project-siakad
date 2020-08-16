@@ -1,1 +1,1 @@
-LOGIN ADMIN
+@extends('layouts.adminlayout')

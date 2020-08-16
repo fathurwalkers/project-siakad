@@ -1,1 +1,1 @@
-USER BERANDA
+@extends('layouts.userlayout')

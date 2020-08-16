@@ -1,1 +1,1 @@
-OK ADMIN BERANDA
+@extends('layouts.adminlayout')
