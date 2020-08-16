@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/home', 'HomeController@home');
+Route::get('/beranda', 'HomeController@home');
+
+Route::get('/admin/login', 'AdminController@login');
