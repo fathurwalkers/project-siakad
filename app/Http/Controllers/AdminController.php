@@ -16,8 +16,18 @@ class AdminController extends Controller
         return view('adminlogin');
     }
 
+    public function AuthLogin()
+    {
+        //
+    }
+
     public function beranda()
     {
         return view('adminberanda');
+    }
+
+    public function alert()
+    {
+        return view('welcome');
     }
 }
