@@ -18,7 +18,12 @@ class AdminController extends Controller
 
     public function AuthLogin()
     {
-        //
+        $user = Users::find($request);
+        if (isset($users)) {
+            return view('adminberanda');
+        } else {
+            return view('adminlogin');
+        }
     }
 
     public function beranda()
