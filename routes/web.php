@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // PUBLIC ROUTE 
-Route::get('/beranda', 'HomeController@home');
+Route::get('/', 'HomeController@home');
 
 // ADMIN ROUTE 
 Route::get('/admin/login', 'AdminController@login');

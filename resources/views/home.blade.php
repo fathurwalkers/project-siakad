@@ -1,3 +1,1 @@
-@extends('layouts.layout')
-
-<?php echo 'OKOK'; ?>
+@extends('layouts.homelayout')
