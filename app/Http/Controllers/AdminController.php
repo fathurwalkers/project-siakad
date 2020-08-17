@@ -15,7 +15,11 @@ class AdminController extends Controller
 
     public function login()
     {
-        return view('adminlogin');
+        if (!session('sesi_user')) {
+            return view('adminlogin');
+        }
+
+        return redirect('/admin/beranda');
     }
 
     public function ceklogin(Request $request)
@@ -38,7 +42,6 @@ class AdminController extends Controller
         if (!session('sesi_user')) {
             return redirect('/admin/login');
         }
-        // dd(session('sesi_user'));
 
         return view('adminberanda');
     }
