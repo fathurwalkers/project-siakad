@@ -23,8 +23,10 @@ class AdminController extends Controller
         $user = Login::where('username', $request->username)->firstOrFail();
         if ($user) {
             if ($request->password == $user->password) {
-                session(['sesi_user' => $user]);
-                return redirect('/admin/beranda');
+                if ($user->level === 1) {
+                    session(['sesi_user' => $user]);
+                    return redirect('/admin/beranda');
+                }
             }
         }
 
