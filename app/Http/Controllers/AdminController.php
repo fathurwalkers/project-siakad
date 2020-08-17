@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -16,13 +17,14 @@ class AdminController extends Controller
         return view('adminlogin');
     }
 
-    public function AuthLogin()
+    public function ceklogin()
     {
-        $user = Users::find($request);
-        if (isset($users)) {
-            return view('adminberanda');
-        } else {
+        $user = DB::table('data_guru')->where('username', 'aminah')->first();
+        // dd($user);
+        if (!isset($user)) {
             return view('adminlogin');
+        } else {
+            return redirect('/admin/beranda');
         }
     }
 
