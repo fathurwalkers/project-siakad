@@ -13,7 +13,7 @@
     <meta name="author" content="Themesbox17">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-    <title>Neon - Bootstrap + Laravel + PHP Admin Dashboard Template</title>
+    <title>SIAKAD</title>
 
     <!-- Fevicon -->
     <link rel="shortcut icon" href="{{ asset('neon/images/favicon.ico') }}">
@@ -50,14 +50,14 @@
                                             src="{{ asset('neon/images/logo.svg') }}" height="40" alt="logo"></a>
                                 </h3>
                                 <div class="p-3">
-                                    <form method="post" action="/admin/proseslogin">
+                                    <form method="post" action="">
                                         @csrf
                                         <div class="text-center mb-3">
                                             <h4 class="text-black">Sign In !</h4>
                                             <p class="text-muted">New to Neon? <a href="page-register.html">Sign Up</a>
                                                 Here</p>
                                         </div>
-                                        <div class="social-login text-center">
+                                        {{-- <div class="social-login text-center">
                                             <button type="button" class="btn btn-facebook btn-rounded mb-1"><i
                                                     class="icon-social-facebook m-r-5"></i> Facebook </button>
                                             <button type="button" class="btn btn-googleplus btn-rounded mb-1"><i
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="login-or">
                                             <h6 class="text-muted">OR</h6>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="username" placeholder="Username"
                                                 required autocomplete="off" name="username">

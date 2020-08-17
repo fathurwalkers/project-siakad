@@ -7,7 +7,7 @@ Route::get('/', 'HomeController@home');
 
 // ADMIN ROUTE 
 Route::get('/admin/login', 'AdminController@login');
-Route::post('/admin/proseslogin', 'AdminController@ceklogin');
+Route::post('/admin/login', 'AdminController@ceklogin');
 Route::get('/admin/daftar', 'AdminController@daftar');
 Route::get('/admin/beranda', 'AdminController@beranda');
 Route::get('/default', 'AdminController@alert');
