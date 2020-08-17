@@ -424,7 +424,7 @@
                                                     class="icon-settings text-warning mr-2"></i> Setting</a>
                                             <a class="dropdown-item" href="#"><i class="icon-lock text-info mr-2"></i>
                                                 Lock Screen</a>
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="/admin/logout"><i
                                                     class="icon-power text-danger mr-2"></i> Logout</a>
                                         </div>
                                     </div>
