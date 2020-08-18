@@ -35,7 +35,7 @@ class AdminController extends Controller
         $mail->SMTPAuth = true;
         //ganti dengan email dan password yang akan di gunakan sebagai email pengirim
         $mail->Username = 'fathurwalkers@gmail.com';
-        $mail->Password = 'Fathur160199';
+        $mail->Password = '';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         //ganti dengan email yg akan di gunakan sebagai email pengirim
@@ -58,13 +58,13 @@ class AdminController extends Controller
     {
         $sesi_validasi = session('sesi_validasi');
         $cek_user = Login::where('email', $sesi_validasi)->firstOrFail();
-        // dd($cek_user);
         if ($cek_user) {
             $update_user = Login::where('iduser', $cek_user->iduser)
                 ->update(['validasi' => 2]);
             session()->forget('sesi_validasi');
             return redirect('/admin/login')->with('status_terkonfirmasi', 'Selamat, Akun anda telah aktif!');
         }
+        return redirect('/admin/login')->with('status_gagal_konfirmasi', 'Verifikasi telah kadaluarsa, silahkan melakukan verifikasi ulang.');
     }
 
     public function login(Request $request)

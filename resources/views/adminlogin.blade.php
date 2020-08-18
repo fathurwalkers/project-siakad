@@ -80,6 +80,12 @@
                                         </div>
                                         @endif
 
+                                        @if (session('status_gagal_konfirmasi'))
+                                        <div class="alert alert-danger text-center">
+                                            {{ session('status_gagal_konfirmasi') }}
+                                        </div>
+                                        @endif
+
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="username"
                                                 placeholder="Masukkan username.." autocomplete="off" name="username"
