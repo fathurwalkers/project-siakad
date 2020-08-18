@@ -11,7 +11,9 @@ class Login extends Model
     protected $fillable = [
         'username',
         'password',
-        'level'
+        'email',
+        'level',
+        'validasi'
     ];
 
     public $timestamps = false;

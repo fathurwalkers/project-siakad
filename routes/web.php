@@ -10,6 +10,7 @@ Route::get('/admin/login', 'AdminController@login');
 Route::post('/admin/login', 'AdminController@ceklogin');
 Route::get('/admin/daftar', 'AdminController@daftar');
 Route::post('/admin/daftar', 'AdminController@postdaftar');
+Route::get('/admin/validasi', 'AdminController@validasi');
 Route::get('/admin/beranda', 'AdminController@beranda');
 Route::get('/default', 'AdminController@alert');
 Route::get('/admin/logout', 'AdminController@logout');

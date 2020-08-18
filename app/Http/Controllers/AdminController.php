@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Login;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class AdminController extends Controller
 {
@@ -17,12 +19,52 @@ class AdminController extends Controller
     {
         $data = new Login;
         $data = Login::create([
-            'username' => $request->username,
-            'password' => $request->password,
-            'level' => $request->level
+            'username'  => $request->username,
+            'password'  => $request->password,
+            'email'     => $request->email,
+            'level'     => $request->level,
+            'validasi'  => $request->validasi
         ]);
         $data->save();
-        return redirect('/admin/login');
+
+
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        //ganti dengan email dan password yang akan di gunakan sebagai email pengirim
+        $mail->Username = 'fathurwalkers@gmail.com';
+        $mail->Password = 'Fathur160199';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+        //ganti dengan email yg akan di gunakan sebagai email pengirim
+        $mail->setFrom('fathurwalkers@gmail.com', 'SIAKAD TK');
+        $mail->addAddress($request->email, $request->username);
+        $mail->isHTML(true);
+        $mail->Subject = "Aktivasi Akun SIAKAD TK";
+        $mail->Body = "Selamat, anda berhasil membuat akun. Untuk mengaktifkan akun anda silahkan klik link dibawah ini. 
+        <br> <a href='http://127.0.0.1:8000/admin/validasi";
+        // $mail->Body .= $request->email;
+        $mail->Body .= "'>AKTIFKAN AKUN</a>";
+        $mail->send();
+
+        session(['sesi_validasi' => $request->email]);
+
+        return redirect('/admin/login')->with('status_validasi', 'Email verifikasi telah dikirim, silahkan verifikasi terlebih dahulu');
+    }
+
+    public function validasi(Request $request)
+    {
+        $sesi_validasi = session('sesi_validasi');
+        $cek_user = Login::where('email', $sesi_validasi)->firstOrFail();
+        // dd($cek_user);
+        if ($cek_user) {
+            $update_user = Login::where('iduser', $cek_user->iduser)
+                ->update(['validasi' => 2]);
+            session()->forget('sesi_validasi');
+            return redirect('/admin/login')->with('status_terkonfirmasi', 'Selamat, Akun anda telah aktif!');
+        }
     }
 
     public function login(Request $request)
@@ -39,8 +81,10 @@ class AdminController extends Controller
         if ($user) {
             if ($request->password == $user->password) {
                 if ($user->level === 1) {
-                    session(['sesi_user' => $user]);
-                    return redirect('/admin/beranda');
+                    if ($user->validasi === 2) {
+                        session(['sesi_user' => $user]);
+                        return redirect('/admin/beranda');
+                    }
                 }
             }
         }

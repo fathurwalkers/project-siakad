@@ -59,6 +59,16 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <input type="hidden" name="validasi" class="form-control" id="validasi"
+                                                value="1">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="email" class="form-control" id="email"
+                                                placeholder="Masukkan Email..." required>
+                                        </div>
+
+                                        <div class="form-group">
                                             <input type="text" name="username" class="form-control" id="username"
                                                 placeholder="Username..." required>
                                         </div>
