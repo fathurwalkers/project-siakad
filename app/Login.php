@@ -13,4 +13,6 @@ class Login extends Model
         'password',
         'level'
     ];
+
+    public $timestamps = false;
 }

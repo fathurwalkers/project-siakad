@@ -13,6 +13,21 @@ class AdminController extends Controller
         return view('adminregister');
     }
 
+    public function postdaftar(Request $request)
+    {
+        $data = new Login;
+
+        $data = Login::create([
+            'username' => $request->username,
+            'password' => $request->password,
+            'level' => $request->level
+        ]);
+
+        $data->save();
+
+        return redirect('/admin/login');
+    }
+
     public function login()
     {
         if (!session('sesi_user')) {
@@ -44,7 +59,7 @@ class AdminController extends Controller
         }
 
         $users = session('sesi_user');
-        return view('adminberanda');
+        return view('adminberanda', compact('users'));
     }
 
     public function alert()

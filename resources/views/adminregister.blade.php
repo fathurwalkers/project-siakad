@@ -19,9 +19,9 @@
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <!-- Start CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('neon/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('neon/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('neon/css/style.css') }}" rel="stylesheet" type="text/css">
     <!-- End CSS -->
 
 </head>
@@ -46,43 +46,35 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="text-center mt-0 m-b-15">
-                                    <a href="index-2.html" class="xp-web-logo"><img src="assets/images/logo.svg"
-                                            height="40" alt="logo"></a>
+                                    <a href="index-2.html" class="xp-web-logo"><img
+                                            src="{{ asset('neon/images/logo.svg') }}" height="40" alt="logo"></a>
                                 </h3>
                                 <div class="p-3">
-                                    <form action="#">
+                                    <form action="" method="post">
+                                        @csrf
                                         <div class="text-center mb-3">
                                             <h4 class="text-black">Create New Account</h4>
                                             <p class="text-muted">Already have an account? <a
                                                     href="page-login.html">Sign in</a> Here</p>
                                         </div>
-                                        <div class="social-login text-center">
-                                            <button type="button" class="btn btn-facebook btn-rounded mb-1"><i
-                                                    class="icon-social-facebook m-r-5"></i> Facebook </button>
-                                            <button type="button" class="btn btn-googleplus btn-rounded mb-1"><i
-                                                    class="icon-social-google m-r-5"></i> Google+ </button>
-                                        </div>
-                                        <div class="login-or">
-                                            <h6 class="text-muted">OR</h6>
+                                        <div class="form-group">
+                                            <input type="text" name="username" class="form-control" id="username"
+                                                placeholder="Username..." required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="username" placeholder="Username"
+                                            <input type="password" name="password" class="form-control" id="email"
+                                                placeholder="Password..." required>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input type="radio" name="level" class="form-control" id="level2" value="1"
                                                 required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="email" placeholder="Email"
+                                            <label for="level1">Guru</label>
+
+                                            <input type="radio" name="level" class="form-control" id="level2" value="2"
                                                 required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" id="password"
-                                                placeholder="Password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="terms">
-                                                <label class="custom-control-label" for="terms">I Agree to Terms &
-                                                    Conditions of Neon</label>
-                                            </div>
+                                            <label for="level2">Siswa</label>
+
                                         </div>
                                         <button type="submit"
                                             class="btn btn-primary btn-rounded btn-lg btn-block">Create an
@@ -105,16 +97,16 @@
     <!-- End XP Container -->
 
     <!-- Start JS -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/modernizr.min.js"></script>
-    <script src="assets/js/detect.js"></script>
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/sidebar-menu.js"></script>
+    <script src="{{ asset('neon/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('neon/js/popper.min.js') }}"></script>
+    <script src="{{ asset('neon/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('neon/js/modernizr.min.js') }}"></script>
+    <script src="{{ asset('neon/js/detect.js') }}"></script>
+    <script src="{{ asset('neon/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('neon/js/sidebar-menu.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('neon/js/main.js') }}"></script>
     <!-- End JS -->
 
 </body>
