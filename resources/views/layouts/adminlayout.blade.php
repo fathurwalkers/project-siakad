@@ -415,7 +415,7 @@
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="xp-userprofile">
                                             <a class="dropdown-item py-3 text-white text-center font-16"
-                                                href="#">Welcome, {{ $users->username }} </a>
+                                                href="#">Welcome, Admin </a>
                                             <a class="dropdown-item" href="#"><i
                                                     class="icon-user text-primary mr-2"></i> Profile</a>
                                             <a class="dropdown-item" href="#"><i
@@ -424,8 +424,15 @@
                                                     class="icon-settings text-warning mr-2"></i> Setting</a>
                                             <a class="dropdown-item" href="#"><i class="icon-lock text-info mr-2"></i>
                                                 Lock Screen</a>
-                                            <a class="dropdown-item" href="/admin/logout"><i
-                                                    class="icon-power text-danger mr-2"></i> Logout</a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                              document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
                                         </div>
                                     </div>
                                 </li>
