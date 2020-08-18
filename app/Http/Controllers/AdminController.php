@@ -34,7 +34,7 @@ class AdminController extends Controller
             }
         }
 
-        return redirect('/admin/login')->with('fail', 'Login gagal');
+        return redirect('/admin/login')->with('status_fail', 'Login gagal, username atau password salah!');
     }
 
     public function beranda()
@@ -43,6 +43,7 @@ class AdminController extends Controller
             return redirect('/admin/login');
         }
 
+        $users = session('sesi_user');
         return view('adminberanda');
     }
 
@@ -54,6 +55,6 @@ class AdminController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return redirect('/admin/login');
+        return redirect('/admin/login')->with('status', 'Anda telah logout!');
     }
 }
