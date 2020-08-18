@@ -16,15 +16,12 @@ class AdminController extends Controller
     public function postdaftar(Request $request)
     {
         $data = new Login;
-
         $data = Login::create([
             'username' => $request->username,
             'password' => $request->password,
             'level' => $request->level
         ]);
-
         $data->save();
-
         return redirect('/admin/login');
     }
 
@@ -33,7 +30,6 @@ class AdminController extends Controller
         if (!session('sesi_user')) {
             return view('adminlogin');
         }
-
         return redirect('/admin/beranda');
     }
 
@@ -48,7 +44,6 @@ class AdminController extends Controller
                 }
             }
         }
-
         return redirect('/admin/login')->with('status_fail', 'Login gagal, username atau password salah!');
     }
 
@@ -57,7 +52,6 @@ class AdminController extends Controller
         if (!session('sesi_user')) {
             return redirect('/admin/login');
         }
-
         $users = session('sesi_user');
         return view('adminberanda', compact('users'));
     }

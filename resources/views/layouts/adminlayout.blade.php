@@ -415,7 +415,7 @@
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="xp-userprofile">
                                             <a class="dropdown-item py-3 text-white text-center font-16"
-                                                href="#">Welcome, {{ $users->username }}</a>
+                                                href="#">Welcome, {{ $users->username }} </a>
                                             <a class="dropdown-item" href="#"><i
                                                     class="icon-user text-primary mr-2"></i> Profile</a>
                                             <a class="dropdown-item" href="#"><i
