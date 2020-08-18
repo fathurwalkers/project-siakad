@@ -25,12 +25,12 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        if (!session('sesi_user')) {
-            return view('adminlogin');
+        if (session('sesi_user')) {
+            return redirect('/admin/beranda');
         }
-        return redirect('/admin/beranda');
+        return view('adminlogin');
     }
 
     public function ceklogin(Request $request)
@@ -44,7 +44,7 @@ class AdminController extends Controller
                 }
             }
         }
-        return redirect('/admin/login')->with('status_fail', 'Login gagal, username atau password salah!');
+        return redirect('/admin/login')->with('status_fail', 'Login gagal, username atau password salah')->withInput();
     }
 
     public function beranda()

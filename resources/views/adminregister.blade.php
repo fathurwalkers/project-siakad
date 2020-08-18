@@ -53,10 +53,11 @@
                                     <form action="" method="post">
                                         @csrf
                                         <div class="text-center mb-3">
-                                            <h4 class="text-black">Create New Account</h4>
-                                            <p class="text-muted">Already have an account? <a
-                                                    href="page-login.html">Sign in</a> Here</p>
+                                            <h4 class="text-black">Registrasi User</h4>
+                                            <p class="text-muted">Sudah mempunyai akun?
+                                                <a href="{{ url('/admin/login') }}">Masuk</a> disini</p>
                                         </div>
+
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control" id="username"
                                                 placeholder="Username..." required>

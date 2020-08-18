@@ -53,9 +53,10 @@
                                     <form method="post" action="">
                                         @csrf
                                         <div class="text-center mb-3">
-                                            <h4 class="text-black">Sign In !</h4>
-                                            <p class="text-muted">New to Neon? <a href="page-register.html">Sign Up</a>
-                                                Here</p>
+                                            <h4 class="text-black">Login User</h4>
+                                            <p class="text-muted">belum mempunyai akun? <a
+                                                    href="{{ url('/admin/daftar') }}">Daftar</a>
+                                                disini</p>
                                         </div>
                                         {{-- <div class="social-login text-center">
                                             <button type="button" class="btn btn-facebook btn-rounded mb-1"><i
@@ -66,13 +67,21 @@
                                         <div class="login-or">
                                             <h6 class="text-muted">OR</h6>
                                         </div> --}}
+
+                                        @if (session('status_fail'))
+                                        <div class="alert alert-danger text-center">
+                                            {{ session('status_fail') }}
+                                        </div>
+                                        @endif
+
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="username" placeholder="Username"
-                                                required autocomplete="off" name="username">
+                                            <input type="text" class="form-control" id="username"
+                                                placeholder="Masukkan username.." autocomplete="off" name="username"
+                                                value="{{ old('username') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="password"
-                                                placeholder="Password" required name="password">
+                                                placeholder="Masukkan password.." required name="password">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-6">
@@ -88,8 +97,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-rounded btn-lg btn-block">Sign
-                                            In</button>
+                                        <button type="submit"
+                                            class="btn btn-primary btn-rounded btn-lg btn-block">LOGIN</button>
                                     </form>
                                 </div>
                             </div>
