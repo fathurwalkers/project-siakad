@@ -15,4 +15,6 @@ class User extends Model implements Authenticatable
         'email',
         'password'
     ];
+
+    public $timestamps = false;
 }

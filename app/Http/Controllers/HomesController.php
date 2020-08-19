@@ -11,8 +11,8 @@ class HomesController extends Controller
         return view('homes');
     }
 
-    public function cek(Request $request)
+    public function cek($token)
     {
-        //
+        return dd($token);
     }
 }

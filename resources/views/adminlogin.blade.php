@@ -86,6 +86,12 @@
                                         </div>
                                         @endif
 
+                                        @if (session('status_logout'))
+                                        <div class="alert alert-danger text-center">
+                                            {{ session('status_logout') }}
+                                        </div>
+                                        @endif
+
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="username"
                                                 placeholder="Masukkan username.." autocomplete="off" name="username"

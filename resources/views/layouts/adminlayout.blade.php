@@ -343,6 +343,7 @@
                                                             <a href="#" class="text-primary">View all</a>
                                                         </h5>
                                                 </li>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -424,12 +425,12 @@
                                                     class="icon-settings text-warning mr-2"></i> Setting</a>
                                             <a class="dropdown-item" href="#"><i class="icon-lock text-info mr-2"></i>
                                                 Lock Screen</a>
-                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            <a class="dropdown-item" href="{{ url('/admin/keluar') }}" onclick="event.preventDefault();
                                                               document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                {{ __('keluar') }}
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            <form id="logout-form" action="{{ url('/admin/login') }}" method="POST"
                                                 style="display: none;">
                                                 @csrf
                                             </form>
