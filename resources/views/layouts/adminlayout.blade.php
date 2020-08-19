@@ -430,7 +430,7 @@
                                                 {{ __('keluar') }}
                                             </a>
 
-                                            <form id="logout-form" action="{{ url('/admin/login') }}" method="POST"
+                                            <form id="logout-form" action="{{ url('/admin/keluar') }}" method="POST"
                                                 style="display: none;">
                                                 @csrf
                                             </form>

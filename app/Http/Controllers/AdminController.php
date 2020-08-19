@@ -94,13 +94,13 @@ class AdminController extends Controller
 
     public function ceklogin(Request $request)
     {
-        $user_login = Login::where('username', $request->username)->firstOrFail();
-        $cek_password = Hash::check($request->password, $user_login->password);
-        if ($user_login) {
+        $cek_login = Login::where('username', $request->username)->firstOrFail();
+        $cek_password = Hash::check($request->password, $cek_login->password);
+        if ($cek_login) {
             if ($cek_password) {
-                if ($user_login->level === 1) {
-                    if ($user_login->validasi === 2) {
-                        session(['sesi_user' => $user_login]);
+                if ($cek_login->level === 1) {
+                    if ($cek_login->validasi === 2) {
+                        session(['sesi_user' => $cek_login]);
                         return redirect('/admin');
                     }
                 }
@@ -126,7 +126,7 @@ class AdminController extends Controller
     public function keluar(Request $request)
     {
         $request->session()->flush();
-        return redirect('/admin/login')->with('status_logout', 'Anda telah logout!');
+        return redirect('/admin/login');
     }
 
     public function lupapassword()
@@ -137,10 +137,6 @@ class AdminController extends Controller
     public function postLupapassword(Request $request)
     {
         $reset = Login::where('email', $request->email)->firstOrFail();
-
-        // $token = Hash::make($reset->username, [
-        //     'rounds' => 12
-        // ]);
 
         if ($reset) {
             if ($reset->email == $request->email) {
@@ -166,7 +162,6 @@ class AdminController extends Controller
                 $mail->Body .= $reset->token;
                 $mail->Body .= "'>AKTIFKAN AKUN</a>";
                 $mail->send();
-                session('validasi_password');
                 return redirect('/lupa-password')->with('status_terkirim', 'Email verifikasi password telah terkirim. silahkan cek email anda untuk melakukan reset password');
             }
         }
@@ -180,7 +175,11 @@ class AdminController extends Controller
 
         if ($cek_token2) {
             if (Hash::check($cek_token2->username, $cek_token2->token)) {
-                session(['get_user' => $cek_token2]);
+                session([
+                    'cek_valid' => 'cek_valid',
+                    'get_user' => $cek_token2
+                ]);
+                // session(['get_user' => $cek_token2]);
                 return redirect('/lupa-password/reset/');
             }
         }
@@ -189,22 +188,33 @@ class AdminController extends Controller
 
     public function resetpassword(Request $request)
     {
-        if (!session('validasi_password')) {
+        $cek_valid = session('cek_valid');
+        if (!$cek_valid) {
+            return redirect('/admin/login');
+        } else {
             $get_user = session('get_user');
-            session(['user_get' => $user_get]);
-            // dd($get_user);
+            session(['user_get' => $get_user]);
+            // dump($get_user);
+            // dd($cek_valid);
             return view('resetpassword');
         }
-        return redirect('/admin/login');
     }
 
     public function gantipassword(Request $request)
     {
         $reset_user = session('user_get');
-        dd($reset_user);
-        $reset_password = Login::where('username', $get_user->username)
+        // dd($reset_user);
+
+        $password_baru = Hash::make($request->password, [
+            'rounds' => 12
+        ]);
+
+        $reset_password = Login::where('username', $reset_user->username)
             ->update([
-                'password' => $request->password
+                'password' => $password_baru
             ]);
+
+        session()->flush();
+        return redirect('/admin/login')->with('status_passwordreset', 'Anda telah berhasil melakukan reset password.');
     }
 }

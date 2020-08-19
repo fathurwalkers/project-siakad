@@ -20,7 +20,7 @@ Route::post('/admin/daftar', 'AdminController@postdaftar');
 Route::get('/admin/validasi/{cek}/{cektoken}', 'AdminController@validasi');
 Route::get('/admin', 'AdminController@beranda');
 Route::get('/default', 'AdminController@alert');
-Route::get('/admin/keluar', 'AdminController@keluar');
+Route::post('/admin/keluar', 'AdminController@keluar');
 
 // USER ROUTE 
 Route::get('/user/login', 'PenggunaController@login');

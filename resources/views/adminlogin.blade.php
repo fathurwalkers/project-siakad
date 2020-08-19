@@ -80,6 +80,12 @@
                                         </div>
                                         @endif
 
+                                        @if (session('status_passwordreset'))
+                                        <div class="alert alert-success text-center">
+                                            {{ session('status_passwordreset') }}
+                                        </div>
+                                        @endif
+
                                         @if (session('status_gagal_konfirmasi'))
                                         <div class="alert alert-danger text-center">
                                             {{ session('status_gagal_konfirmasi') }}

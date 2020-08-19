@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="password"
                                                 placeholder="konfirmasi password baru.." autocomplete="off"
-                                                name="password" required>
+                                                name="password2" required>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-rounded btn-lg btn-block">Reset
