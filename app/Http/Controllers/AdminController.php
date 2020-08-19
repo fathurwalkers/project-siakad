@@ -37,8 +37,6 @@ class AdminController extends Controller
             'token'     => $token
         ]);
         $data->save();
-        // dd($data);
-
 
         $mail = new PHPMailer(true);
         $mail->SMTPDebug = 0;
