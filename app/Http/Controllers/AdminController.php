@@ -8,6 +8,7 @@ use App\Login;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -67,15 +68,6 @@ class AdminController extends Controller
 
     public function validasi(Request $request, $cek)
     {
-        // $sesi_validasi = session('sesi_validasi');
-        // $cek_user = Login::where('email', $sesi_validasi)->firstOrFail();
-        // if ($cek_user) {
-        //     $update_user = Login::where('iduser', $cek_user->iduser)
-        //         ->update(['validasi' => 2]);
-        //     session()->forget('sesi_validasi');
-        //     return redirect('/admin/login')->with('status_terkonfirmasi', 'Selamat, Akun anda telah aktif!');
-        // }
-
         $cek_token = Login::where('username', $cek)->firstOrFail();
 
         if ($cek_token) {
@@ -135,5 +127,84 @@ class AdminController extends Controller
     {
         $request->session()->flush();
         return redirect('/admin/login')->with('status_logout', 'Anda telah logout!');
+    }
+
+    public function lupapassword()
+    {
+        return view('lupapassword');
+    }
+
+    public function postLupapassword(Request $request)
+    {
+        $reset = Login::where('email', $request->email)->firstOrFail();
+
+        // $token = Hash::make($reset->username, [
+        //     'rounds' => 12
+        // ]);
+
+        if ($reset) {
+            if ($reset->email == $request->email) {
+                $mail = new PHPMailer(true);
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                //ganti dengan email dan password yang akan di gunakan sebagai email pengirim
+                $mail->Username = 'siakadtk123@gmail.com';
+                $mail->Password = 'jancokjancok';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+                //ganti dengan email yg akan di gunakan sebagai email pengirim
+                $mail->setFrom('siakadtk123@gmail.com', 'SIAKAD TK');
+                $mail->addAddress($request->email, $request->username);
+                $mail->isHTML(true);
+                $mail->Subject = "Reset Password akun SIAKAD TK";
+                $mail->Body = "Anda telah mengirim request Reset Password, Berikut dibawah ini link untuk reset Password anda. 
+                <br> <a href='http://127.0.0.1:8000/lupa-password/validasi_password/";
+                $mail->Body .= $reset->username;
+                $mail->Body .= "/";
+                $mail->Body .= $reset->token;
+                $mail->Body .= "'>AKTIFKAN AKUN</a>";
+                $mail->send();
+                session('validasi_password');
+                return redirect('/lupa-password')->with('status_terkirim', 'Email verifikasi password telah terkirim. silahkan cek email anda untuk melakukan reset password');
+            }
+        }
+
+        return redirect('/lupa-password')->with('status_tidak_terkirim', 'email yang anda masukkan tidak terdaftar. silahkan masukkan email yang terdaftar!');
+    }
+
+    public function getvalidasiPassword(Request $request, $cekk)
+    {
+        $cek_token2 = Login::where('username', $cekk)->firstOrFail();
+
+        if ($cek_token2) {
+            if (Hash::check($cek_token2->username, $cek_token2->token)) {
+                session(['get_user' => $cek_token2]);
+                return redirect('/lupa-password/reset/');
+            }
+        }
+        return view('adminlogin')->with('status_gagal_konfirmasi', 'Verifikasi telah kadaluarsa, silahkan melakukan verifikasi ulang.');
+    }
+
+    public function resetpassword(Request $request)
+    {
+        if (!session('validasi_password')) {
+            $get_user = session('get_user');
+            session(['user_get' => $user_get]);
+            // dd($get_user);
+            return view('resetpassword');
+        }
+        return redirect('/admin/login');
+    }
+
+    public function gantipassword(Request $request)
+    {
+        $reset_user = session('user_get');
+        dd($reset_user);
+        $reset_password = Login::where('username', $get_user->username)
+            ->update([
+                'password' => $request->password
+            ]);
     }
 }

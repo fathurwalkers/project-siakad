@@ -7,6 +7,12 @@ Route::get('/', 'HomesController@homes');
 Route::get('/cek/{token}', 'HomesController@cek');
 
 // ADMIN ROUTE 
+Route::get('/lupa-password', 'AdminController@lupapassword');
+Route::get('/lupa-password/reset', 'AdminController@resetpassword');
+Route::post('/lupa-password/reset', 'AdminController@gantipassword');
+Route::post('/lupa-password', 'AdminController@postLupapassword');
+Route::get('/lupa-password/validasi_password/{cekk}/{cektokenn}', 'AdminController@getvalidasiPassword');
+
 Route::get('/admin/login', 'AdminController@login');
 Route::post('/admin/login', 'AdminController@ceklogin');
 Route::get('/admin/daftar', 'AdminController@daftar');

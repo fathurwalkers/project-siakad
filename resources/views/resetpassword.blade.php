@@ -13,7 +13,7 @@
     <meta name="author" content="Themesbox17">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-    <title>SIAKAD</title>
+    <title>Reset Password</title>
 
     <!-- Fevicon -->
     <link rel="shortcut icon" href="{{ asset('neon/images/favicon.ico') }}">
@@ -53,10 +53,8 @@
                                     <form method="post" action="">
                                         @csrf
                                         <div class="text-center mb-3">
-                                            <h4 class="text-black">Login User</h4>
-                                            <p class="text-muted">belum mempunyai akun? <a
-                                                    href="{{ url('/admin/daftar') }}">Daftar</a>
-                                                disini</p>
+                                            <h4 class="text-black">Reset Password</h4>
+                                            <p class="text-muted">Silahkan masukkan password baru anda.</p>
                                         </div>
                                         {{-- <div class="social-login text-center">
                                             <button type="button" class="btn btn-facebook btn-rounded mb-1"><i
@@ -68,62 +66,26 @@
                                             <h6 class="text-muted">OR</h6>
                                         </div> --}}
 
-                                        @if (session('status_fail'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_fail') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_terkonfirmasi'))
-                                        <div class="alert alert-success text-center">
-                                            {{ session('status_terkonfirmasi') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_gagal_konfirmasi'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_gagal_konfirmasi') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_logout'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_logout') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_validasi'))
+                                        @if (session('status_tidak_terkirim'))
                                         <div class="alert alert-info text-center">
-                                            {{ session('status_validasi') }}
+                                            {{ session('status_tidak_terkirim') }}
                                         </div>
                                         @endif
 
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="username"
-                                                placeholder="Masukkan username.." autocomplete="off" name="username"
-                                                value="{{ old('username') }}" required>
-                                        </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" id="password"
-                                                placeholder="Masukkan password.." required name="password">
+                                                placeholder="password baru.." autocomplete="off" name="password"
+                                                required>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-6">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberme">
-                                                    <label class="custom-control-label" for="rememberme">Remember
-                                                        Me</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-6 text-right">
-                                                <label class="forgot-psw">
-                                                    <a id="forgot-psw" href="{{ url('/lupa-password') }}">Forgot
-                                                        Password?</a>
-                                                </label>
-                                            </div>
+
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password"
+                                                placeholder="konfirmasi password baru.." autocomplete="off"
+                                                name="password" required>
                                         </div>
-                                        <button type="submit"
-                                            class="btn btn-primary btn-rounded btn-lg btn-block">LOGIN</button>
+
+                                        <button type="submit" class="btn btn-primary btn-rounded btn-lg btn-block">Reset
+                                            Password</button>
                                     </form>
                                 </div>
                             </div>

@@ -50,7 +50,7 @@
                                             src="{{ asset('neon/images/logo.svg') }}" height="40" alt="logo"></a>
                                 </h3>
                                 <div class="p-3">
-                                    <form method="post" action="">
+                                    <form method="post" action="{{ url('/lupa-password') }}">
                                         @csrf
                                         <div class="text-center mb-3">
                                             <h4 class="text-black">Login User</h4>
@@ -68,62 +68,41 @@
                                             <h6 class="text-muted">OR</h6>
                                         </div> --}}
 
-                                        @if (session('status_fail'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_fail') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_terkonfirmasi'))
-                                        <div class="alert alert-success text-center">
-                                            {{ session('status_terkonfirmasi') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_gagal_konfirmasi'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_gagal_konfirmasi') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_logout'))
-                                        <div class="alert alert-danger text-center">
-                                            {{ session('status_logout') }}
-                                        </div>
-                                        @endif
-
-                                        @if (session('status_validasi'))
+                                        @if (session('status_foget'))
                                         <div class="alert alert-info text-center">
-                                            {{ session('status_validasi') }}
+                                            {{ session('status_foget') }}
+                                        </div>
+                                        @else <div class="alert alert-info text-center">
+                                            Masukkan alamat email yang terdaftar untuk reset password.
+                                        </div>
+                                        @endif
+
+                                        @if (session('status_terkirim'))
+                                        <div class="alert alert-info text-center">
+                                            {{ session('status_terkirim') }}
+                                        </div>
+                                        @endif
+
+                                        @if (session('status_tidak_terkirim'))
+                                        <div class="alert alert-info text-center">
+                                            {{ session('status_tidak_terkirim') }}
                                         </div>
                                         @endif
 
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="username"
-                                                placeholder="Masukkan username.." autocomplete="off" name="username"
+                                                placeholder="Masukkan username..." autocomplete="off" name="username"
                                                 value="{{ old('username') }}" required>
                                         </div>
+
                                         <div class="form-group">
-                                            <input type="password" class="form-control" id="password"
-                                                placeholder="Masukkan password.." required name="password">
+                                            <input type="text" class="form-control" id="email"
+                                                placeholder="Masukkan email..." autocomplete="off" name="email"
+                                                value="{{ old('email') }}" required>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-6">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberme">
-                                                    <label class="custom-control-label" for="rememberme">Remember
-                                                        Me</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-6 text-right">
-                                                <label class="forgot-psw">
-                                                    <a id="forgot-psw" href="{{ url('/lupa-password') }}">Forgot
-                                                        Password?</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <button type="submit"
-                                            class="btn btn-primary btn-rounded btn-lg btn-block">LOGIN</button>
+
+                                        <button type="submit" class="btn btn-primary btn-rounded btn-lg btn-block">Kirim
+                                            verfikasi</button>
                                     </form>
                                 </div>
                             </div>
