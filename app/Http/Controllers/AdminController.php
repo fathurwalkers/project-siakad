@@ -44,12 +44,10 @@ class AdminController extends Controller
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        //ganti dengan email dan password yang akan di gunakan sebagai email pengirim
         $mail->Username = 'siakadtk123@gmail.com';
         $mail->Password = 'jancokjancok';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-        //ganti dengan email yg akan di gunakan sebagai email pengirim
         $mail->setFrom('siakadtk123@gmail.com', 'SIAKAD TK');
         $mail->addAddress($request->email, $request->username);
         $mail->isHTML(true);
@@ -76,7 +74,6 @@ class AdminController extends Controller
                     ->update([
                         'validasi' => 2
                     ]);
-                // session()->forget('sesi_validasi');
                 return redirect('/admin/login')->with('status_terkonfirmasi', 'Selamat, Akun anda telah aktif!');
             }
         }
@@ -145,12 +142,10 @@ class AdminController extends Controller
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                //ganti dengan email dan password yang akan di gunakan sebagai email pengirim
                 $mail->Username = 'siakadtk123@gmail.com';
                 $mail->Password = 'jancokjancok';
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
-                //ganti dengan email yg akan di gunakan sebagai email pengirim
                 $mail->setFrom('siakadtk123@gmail.com', 'SIAKAD TK');
                 $mail->addAddress($request->email, $request->username);
                 $mail->isHTML(true);
@@ -179,7 +174,6 @@ class AdminController extends Controller
                     'cek_valid' => 'cek_valid',
                     'get_user' => $cek_token2
                 ]);
-                // session(['get_user' => $cek_token2]);
                 return redirect('/lupa-password/reset/');
             }
         }
@@ -194,8 +188,6 @@ class AdminController extends Controller
         } else {
             $get_user = session('get_user');
             session(['user_get' => $get_user]);
-            // dump($get_user);
-            // dd($cek_valid);
             return view('resetpassword');
         }
     }
@@ -203,7 +195,6 @@ class AdminController extends Controller
     public function gantipassword(Request $request)
     {
         $reset_user = session('user_get');
-        // dd($reset_user);
 
         $password_baru = Hash::make($request->password, [
             'rounds' => 12

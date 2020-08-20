@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 // PUBLIC ROUTE 
+Route::fallback(function () {
+    return view('errorpage');
+});
 Route::get('/', 'HomesController@homes');
 Route::get('/cek/{token}', 'HomesController@cek');
 
