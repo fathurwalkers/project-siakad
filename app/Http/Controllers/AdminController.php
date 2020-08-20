@@ -9,6 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class AdminController extends Controller
 {
@@ -83,22 +84,37 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
+        // $cek_cookie = cookie('aktif_login');
         if (session('sesi_user')) {
             return redirect('/admin');
+            // } elseif ($cek_cookie) {
+            // return redirect('/admin');
         }
-        return view('adminlogin');
+        return view('/adminlogin');
     }
 
     public function ceklogin(Request $request)
     {
+        // dd($request->rememberlogin);
+
         $cek_login = Login::where('username', $request->username)->firstOrFail();
         $cek_password = Hash::check($request->password, $cek_login->password);
         if ($cek_login) {
             if ($cek_password) {
                 if ($cek_login->level === 1) {
                     if ($cek_login->validasi === 2) {
+                        // if ($request->rememberlogin == 'on') {
+                        // cookie('activelogin', 'on', 1);
+                        // $sesi_cookie = session(['sesi_user' => $cek_login]);
+                        // $minutes = 1;
+                        // $cookie_login = cookie('set_aktif', $sesi_cookie, $minutes);
+                        // return redirect('/admin');
+                        // } else {
+
                         session(['sesi_user' => $cek_login]);
                         return redirect('/admin');
+
+                        // }
                     }
                 }
             }
@@ -108,10 +124,19 @@ class AdminController extends Controller
 
     public function beranda()
     {
+        // $login_aktif = cookie('set_aktif');
         if (!session('sesi_user')) {
+            // if (!$login_aktif) {
             return redirect('/admin/login');
+            // } elseif ($login_aktif) {
+            // $users = cookie('set_aktif');
+            // dd($users);
+            // return view('adminberanda', compact('users'));
+            // }
         }
         $users = session('sesi_user');
+        $ceking = cookie('set_aktif');
+        // dd($ceking);
         return view('adminberanda', compact('users'));
     }
 
@@ -123,6 +148,7 @@ class AdminController extends Controller
     public function keluar(Request $request)
     {
         $request->session()->flush();
+        cookie(null, null, null);
         return redirect('/admin/login');
     }
 

@@ -116,7 +116,8 @@
                                         <div class="form-row">
                                             <div class="form-group col-6">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberme">
+                                                    <input type="checkbox" name="rememberlogin"
+                                                        class="custom-control-input" id="rememberme">
                                                     <label class="custom-control-label" for="rememberme">Remember
                                                         Me</label>
                                                 </div>
