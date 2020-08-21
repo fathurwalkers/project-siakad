@@ -113,7 +113,7 @@ class AdminController extends Controller
             return redirect('/admin/login');
         }
         $users = session('sesi_user');
-        $ceking = cookie('set_aktif');
+        // $ceking = cookie('set_aktif');
         return view('adminberanda', compact('users'));
     }
 
