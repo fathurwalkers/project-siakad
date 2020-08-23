@@ -84,7 +84,7 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        if (session('sesi_user')) {
+        if (session('sesi_admin')) {
             return redirect('/admin');
         }
         return view('/adminlogin');
@@ -96,10 +96,13 @@ class AdminController extends Controller
         $cek_password = Hash::check($request->password, $cek_login->password);
         if ($cek_login) {
             if ($cek_password) {
-                if ($cek_login->level === 1) {
-                    if ($cek_login->validasi === 2) {
-                        session(['sesi_user' => $cek_login]);
+                if ($cek_login->validasi === 2) {
+                    if ($cek_login->level === 1) {
+                        session(['sesi_admin' => $cek_login]);
                         return redirect('/admin');
+                    } else if ($cek_login->level === 2) {
+                        session(['sesi_user' => $cek_login]);
+                        return redirect('/user');
                     }
                 }
             }
@@ -109,12 +112,22 @@ class AdminController extends Controller
 
     public function beranda()
     {
+        if (!session('sesi_admin')) {
+            return redirect('/admin/login');
+        }
+        $users = session('sesi_admin');
+        // $ceking = cookie('set_aktif');
+        return view('adminberanda', compact('users'));
+    }
+
+    public function berandauser()
+    {
         if (!session('sesi_user')) {
             return redirect('/admin/login');
         }
-        $users = session('sesi_user');
+        $sesi_user = session('sesi_user');
         // $ceking = cookie('set_aktif');
-        return view('adminberanda', compact('users'));
+        return view('userberanda', compact('sesi_user'));
     }
 
     public function alert()

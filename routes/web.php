@@ -26,6 +26,7 @@ Route::get('/default', 'AdminController@alert');
 Route::post('/admin/keluar', 'AdminController@keluar');
 
 // USER ROUTE 
+Route::get('/user', 'AdminController@berandauser');
 Route::get('/user/login', 'PenggunaController@login');
 Route::get('/user/beranda', 'PenggunaController@beranda');
 
