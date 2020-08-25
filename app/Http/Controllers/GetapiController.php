@@ -9,20 +9,18 @@ use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Http;
 
 class GetapiController extends Controller
 {
-    public function index()
+    public function getapi()
     {
-        // $data = Login::all();
-        Login::all();
-        // return response()->json(
-        //     [
-        //         "data" => $data
-        //     ],
-        //     200
-        // );
+        $data = Login::all();
+        return response()->json(
+            [
+                "message" => "data user berhasil di ambil!",
+                "data" => $data
+            ]
+        );
     }
 
     public function postapi(Request $request)
@@ -54,13 +52,5 @@ class GetapiController extends Controller
                 "data" => $data
             ]
         );
-    }
-
-    public function indexapi()
-    {
-        $data = Http::get('https://jsonplaceholder.typicode.com/todos');
-        dd($data);
-        return view('indexapi');
-        // return view('indexapi');
     }
 }

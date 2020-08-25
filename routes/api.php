@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/login', 'Api\LoginController@index');
-Route::post('/postapi', 'Api\LoginController@postapi');
+Route::get('/getapi', 'GetapiController@getapi');
+Route::post('/postapi', 'GetapiController@postapi');
