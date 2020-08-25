@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tambahpostingan');
     }
 
     /**
@@ -35,7 +35,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $posts = new Article;
+
+        $posts = Article::create([
+            'post_judul'    => $request->post_judul,
+            'post_isi'      => $request->post_isi,
+            'post_slug'     => $request->post_slug
+        ]);
+
+        $posts->save();
+
+        return redirect('/admin');
     }
 
     /**

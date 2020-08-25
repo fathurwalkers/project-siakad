@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Login;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Resources\LoginResource;
 
-class GetapiController extends Controller
+class LoginController extends Controller
 {
     public function index()
     {
         // $data = Login::all();
-        Login::all();
+        return LoginResource::collection(Login::all());
         // return response()->json(
         //     [
         //         "data" => $data
@@ -56,11 +52,11 @@ class GetapiController extends Controller
         );
     }
 
-    public function indexapi()
+    public function indexapi(Request $request)
     {
-        $data = Http::get('https://jsonplaceholder.typicode.com/todos');
-        dd($data);
+        // $data = Http::get('http://127.0.0.1:8001/api/getapi');
+        // $data->json();
+        // dd($data);
         return view('indexapi');
-        // return view('indexapi');
     }
 }

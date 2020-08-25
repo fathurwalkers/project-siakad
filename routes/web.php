@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::fallback(function () {
     return view('errorpage');
 });
+Route::get('/shows', 'GetapiController@indexapi');
 Route::get('/', 'HomesController@homes');
 Route::get('/cek/{token}', 'HomesController@cek');
 
@@ -15,6 +16,9 @@ Route::get('/lupa-password/reset', 'AdminController@resetpassword');
 Route::post('/lupa-password/reset', 'AdminController@gantipassword');
 Route::post('/lupa-password', 'AdminController@postLupapassword');
 Route::get('/lupa-password/validasi_password/{cekk}/{cektokenn}', 'AdminController@getvalidasiPassword');
+
+Route::get('/admin/tambah-post', 'PostController@create');
+Route::post('/tambahpost', 'PostController@store');
 
 Route::get('/admin/login', 'AdminController@login');
 Route::post('/admin/login', 'AdminController@ceklogin');
@@ -29,6 +33,7 @@ Route::post('/admin/keluar', 'AdminController@keluar');
 Route::get('/user', 'AdminController@berandauser');
 Route::get('/user/login', 'PenggunaController@login');
 Route::get('/user/beranda', 'PenggunaController@beranda');
+
 
 // Auth::routes();
 

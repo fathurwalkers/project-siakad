@@ -13,7 +13,7 @@
     <meta name="author" content="Themesbox17">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-    <title>Neon - Bootstrap + Laravel + PHP Admin Dashboard Template</title>
+    <title>@yield('title')</title>
 
     <!-- Fevicon -->
     <link rel="shortcut icon" href="{{ asset('neon/images/favicon.ico') }}">
@@ -75,11 +75,6 @@
                 <div class="xp-navigationbar">
                     <ul class="xp-vertical-menu">
                         <li class="xp-vertical-header">Main</li>
-                        <li>
-                            <a href="index-2.html">
-                                <i class="icon-speedometer"></i><span>Dashboard</span>
-                            </a>
-                        </li>
                         @yield('sidebar-menu')
                     </ul>
                 </div>
